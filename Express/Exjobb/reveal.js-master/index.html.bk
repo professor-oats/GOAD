@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
+<title>Kubernetes Presentation</title>
+<link rel="stylesheet" href="dist/reset.css" />
+<link rel="stylesheet" href="dist/reveal.css" />
+<link rel="stylesheet" href="dist/theme/black.css" />
+<!-- Theme used for syntax highlighted code -->
+<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+<link rel="stylesheet" href="dist/main.css">
+<style>
+  /* =========================================
+     LOGO & ANIMATION STYLES
+     ========================================= */
+  .k8s-logo-container {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 30px auto;
+  }
+  #k8s-wheel {
+    width: 100%;
+    height: 100%;
+    fill: #FFD700;
+    /* Glow effect for depth */
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+    /* Apply the intermittent animation */
+    animation: intermittent-spin 6.5s ease-in-out infinite;
+  }
+  /*
+     Intermittent Animation Logic:
+     - 0-15%: Spins quickly (2 seconds)
+     - 15-100%: Pauses (8 seconds)
+     - This creates a cycle where it spins briefly, then rests
+  */
+  @keyframes intermittent-spin {
+    0% { transform: rotate(0deg); }
+    40% { transform: rotate(360deg); }  /* Complete spin in 15% of time */
+    100% { transform: rotate(360deg); } /* Hold position for the rest */
+  }
+  /* Add a pulsing glow effect for extra attention */
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+  }
+  #k8s-wheel {
+    animation: intermittent-spin 6.5s ease-in-out infinite,
+               pulse 3s ease-in-out infinite;
+  }
+  /* =========================================
+     SLIDE STYLING (BLACK BG + WHITE TEXT)
+     ========================================= */
+/*     
+  body {
+    background-color: #000;
+  }
+  .reveal .slides {
+    background-color: #000;
+  }
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .reveal p, .reveal li, .reveal span {
+    color: #e0e0e0;
+  }
+  .sub-title {
+    color: #cccccc;
+    font-size: 1.3em;
+    margin-top: 10px;
+  }
+  .presenter-info {
+    margin-top: 50px;
+    color: #888;
+    font-size: 0.9em;
+  }
+*/  
+  /* Add a gradient background to the front page for depth *//*
+  section:first-child {
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+  }
+*/  
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <!-- FRONT PAGE SLIDE -->
+    <section id="frontpage" class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <img id="bg" src="./src/pictures/first.png" />
+      <img id="walker" src="./src/pictures/troll.png">
+      <div class="magnifier-lens"></div>
+    </section>
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <img id="p1" src="./src/pictures/p1.jpeg" />
+    </section>
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <img id="p3" src="./src/pictures/p3.jpeg" />
+    </section>
+    <section class="list" data-background-image="./src/pictures/mat2.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section data-background-image="./src/pictures/ship2.png" data-background-size="cover" data-background-opacity="0.5">
+      <div class="k8s-logo-container">
+        <!-- 7-Spoke SVG - Properly Aligned -->
+        <svg id="k8s-wheel" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Golden gradient for shading -->
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FFD700; stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#FFA500; stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#FFD700; stop-opacity:1" />
+            </linearGradient>
+            <!-- Dark gradient for depth -->
+            <radialGradient id="darkGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color:#000; stop-opacity:0.3" />
+              <stop offset="100%" style="stop-color:#000; stop-opacity:0.1" />
+            </radialGradient>
+          </defs>
+          <!-- Outer Ring with Gradient -->
+          <circle cx="100" cy="100" r="70" stroke="url(#goldGradient)"
+                  stroke-width="15" fill="none" stroke-linecap="round"/>
+          
+          <!-- 7 Spokes - Radiate from center to outer ring (each ~51.43° apart) -->
+          <!-- Spoke 1: Top (0°) -->
+          <line x1="100" y1="100" x2="99.99" y2="10" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 2: 51.43° -->
+          <line x1="100" y1="100" x2="170" y2="44" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 3: 102.86° -->
+          <line x1="100" y1="100" x2="188" y2="120" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 4: 154.29° -->
+          <line x1="100" y1="100" x2="139" y2="181" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 5: 205.71° -->
+          <line x1="100" y1="100" x2="61" y2="181" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 6: 257.14° -->
+          <line x1="100" y1="100" x2="12" y2="120" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+          
+          <!-- Spoke 7: 308.57° -->
+          <line x1="100" y1="100" x2="30" y2="44" 
+                stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round"/>
+
+          <!-- Center Hub with Shading -->
+          <circle cx="100" cy="100" r="35" fill="url(#goldGradient)" opacity="0.8"/>
+          <circle cx="100" cy="100" r="25" fill="url(#darkGradient)" opacity="0.5"/>
+          <circle cx="100" cy="100" r="15" fill="#FFD700" opacity="0.9"/>
+          
+          <!-- Small accent circles on outer ring (aligned with 7 spokes) -->
+          <circle cx="100" cy="10" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="170" cy="44" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="188" cy="120" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="139" cy="181" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="61" cy="181" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="12" cy="120" r="5" fill="#FFD700" opacity="0.6"/>
+          <circle cx="30" cy="44" r="5" fill="#FFD700" opacity="0.6"/>
+        </svg>
+      </div>
+      <h1>Kubernetes</h1>
+      <p class="sub-title">Container Orchestration Platform</p>
+      <p class="presenter-info">Presented by Me</p>
+      <p class="presenter-info">Wednesday, 2026</p>
+    </section>
+    <section class="list" data-background-image="./src/pictures/ship2.png" data-background-size="cover" data-background-opacity="0.5">
+      <p style="font-size: 1.1em; line-height: 1.6;">Kubernetes or K8s</p>
+                     <ul>
+                        <li>Released on July 21, 2015 -- Snart 11 år OMG</li>
+                        <li>Written in GO</li>
+                        <li>K8s, is an open-source container orchestration system for automating software deployment, scaling, and management</li>
+                        <li>On March 6, 2018, Kubernetes Project reached ninth place in the list of GitHub projects by the number of commits, and second place in authors and issues, after the Linux kernel.</li>
+                    </ul>
+    </section>
+    <!-- Your second slide -->
+    <section class="list" data-background-image="./src/pictures/marcuslada.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p>Visst</p>
+    </section>
+    <section class="list" data-background-image="./src/pictures/marcuslada.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section>
+      <p style="font-size: 1.1em; line-height: 1.6; text-align: center; left: -80px; position: relative;">Project Goals</p>
+      <ul style="text-align: left; display: inline-block; color: #ccc; font-size: 0.5em;">
+        <li>Develop a production ready souvereign cloud stack customisable for company usage</li>
+        <li>Technical research for good or best practiced design choices of the product</li>
+        <li>Building codebase of infrastructure, implementing custom solutions</li>
+        <li>Hardening security with appwise configurations, deploying latest stable battle tested versions</li>
+        <li>Connecting essential parts of the infrastructure to be AI assisted</li>
+        <li>Work towards 100 % functionality and modularity to enable custom adaptions for multiple company needs</li>
+        <li>Researching/Building frameworks to enable further AI assistance</li>
+      </ul>
+    </section>  
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p>Visst</p>
+    </section>
+    <section class="list" data-background-image="./src/pictures/values.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section class="list" data-background-image="./src/pictures/values2.png" data-background-size="cover" data-background-opacity="1">
+    </section>  
+    <section class="list" data-background-image="./src/pictures/yaml.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section class="list" data-background-image="./src/pictures/greetings.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <!-- Example third slide -->
+  </div>
+</div>
+<script src="dist/reveal.js"></script>
+<script src="dist/plugin/notes.js"></script>
+<script src="dist/plugin/markdown.js"></script>
+<script src="dist/plugin/highlight.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Reveal.js initialization
+  Reveal.initialize({
+    hash: true,
+    // Navigation: Arrow keys, spacebar
+    controls: true,
+    progress: true,
+    center: true,
+    history: true,
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    // Add a subtle transition
+    transition: 'fade',
+    // Background settings
+    backgroundTransition: 'fade',
+  });
+</script>
+</body>
+</html>

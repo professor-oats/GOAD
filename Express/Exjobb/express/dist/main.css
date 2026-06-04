@@ -1,0 +1,147 @@
+/*body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#frontpage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-family: Geneva, Tahoma, sans-serif;
+    background: #000000;
+}
+*/
+/*
+.magnifier-lens {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  pointer-events: none;
+
+  background-repeat: no-repeat;
+
+  background-size: 200% 200%;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.6);
+
+  transform: translate(-50%, -50%);
+  display: none;
+}
+*/
+
+#frontpage {
+  position: relative;
+  overflow: hidden;
+}
+
+#bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+#p1 {
+  width: 50%;
+}
+
+#p3 {
+  width: 50%;
+}
+
+
+#walker {
+  position: absolute;
+
+  width: 240px;
+  height: auto;
+
+  right: -300px;
+  bottom: -300px;
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  opacity: 1;
+}
+
+/*
+.magnifier-lens {
+  width: 120px;
+  height: 120px;
+  background: red !important;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 99999;
+}
+*/
+
+.magnifier-lens {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  pointer-events: none;
+
+  display: none;
+
+  background-repeat: no-repeat;
+
+  /* zoom level */
+  background-size: 200% 200%;
+
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  transform: translate(-30%, 0%);
+  //transform: none;
+  overflow: hidden;
+}
+
+#gates h3 {
+  color: red;
+
+  transition: background-color 0.3s ease;
+
+  display: inline-block;
+
+  padding: 8px 16px;
+}
+
+#gates h3:hover {
+  background-color: black;
+}
+
+#stacko ul {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  background-color: black;
+}
+
+#stacko ul li {
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  background-color: black;
+  font-size: 0.6em;
+}
+
+#secrets ul li {
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  font-size: 0.6em;
+}

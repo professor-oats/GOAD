@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
+<title>Kubernetes Presentation</title>
+<link rel="stylesheet" href="dist/reset.css" />
+<link rel="stylesheet" href="dist/reveal.css" />
+<link rel="stylesheet" href="dist/theme/black.css" />
+<!-- Theme used for syntax highlighted code -->
+<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+<link rel="stylesheet" href="dist/main.css">
+<style>
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <!-- FRONT PAGE SLIDE -->
+    <section id="frontpage" class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <img src="./src/pictures/expressen1.png" />
+      <img id="bg" src="./src/pictures/expressen2.png"/>
+      <div class="magnifier-lens"></div>
+    </section>
+    <section class="list" data-background-image="src/pictures/vault1.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <section id="gates" class="list" data-background-image="src/pictures/gates.jpg" data-background-size="cover" data-background-opacity="1">
+      <h3>Börja med Backupen</h3>
+      <h3>Ha backup på Backupen</h3>
+      <h3>Everything is YAML</h3>
+      <h3>YAML is Everything</h3>
+    </section>
+    <section data-background-image="./src/pictures/ship2.png" data-background-size="cover" data-background-opacity="0.5">
+      <h1>El Stacko</h1>
+      <img src="./src/pictures/cloud_in_a_box.png" />
+    </section>
+    <section class="list" data-background-image="./src/pictures/ship2.png" data-background-size="cover" data-background-opacity="0.5">
+      <p>Visst</p>
+    </section>
+    <!-- Your second slide -->
+    <section id="stacko" class="list" data-background-image="./src/pictures/ship2.png" data-background-size="cover" data-background-opacity="1">
+            <p style="font-size: 1.1em; line-height: 1.6;">Egentliga El Stacko</p>
+                     <ul>
+                        <li>Nextcloud/Matrix — Teams replacement</li>
+                        <li>Gitlab — CI/CD + Registry</li>
+                        <li>VLLM/SGLang — Engine for AI backend</li>
+                        <li>Open Webui — First frontend to VLLM </li>
+                        <li>Openclaw — ???</li>
+                        <li>Kagent — ??? </li>
+                        <li>Keycloak — OIDC Provider (SSO, Auth Server, more) </li>
+                        <li>Perlite — Obsidian replacement — Company Wiki </li>
+                        <li>Harbor — Registry if not Gitlab Registry</li>
+                        <li>Kube-Prometheus-Stack — Services Metrics, Monitoring, Log aggregation </li>
+                        <li>Vaultwarden — Credentials Store — If needed</li>
+                    </ul> 
+    </section>
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p>VARS ÄR HASHICORP VAULT??</p>
+    </section>
+    <!-- Ultimate Coolios Transition Here -->
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p>Vad löser då detta?</p>
+    </section>  
+    <section id="secrets" class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p style="font-size: 1.1em; line-height: 1.6;">Kubernetes Secrets är inte så secret</p>
+                     <ul>
+                        <li>Stored plaintext in memory — Viewable by all users + Pods with permissions within Namespace </li>
+                        <li>Unencrypted by default when at rest — Can be read directly from disk </li>
+                        <li>Unencrypted in transit — Can be read between Non-TLS cluster mesh connections</li>
+                    </ul>
+    </section>
+    <section class="list" data-background-image="" data-background-size="cover" data-background-opacity="1">
+      <p>HashiCorp Vault löser detta</p>
+      <p>Och gör det snyggt</p>
+    </section>
+    <section class="list" data-background-image="./src/pictures/softwarestack.png" data-background-size="cover" data-background-opacity="1">
+    </section>
+    <!-- Example third slide -->
+  </div>
+</div>
+<script src="dist/reveal.js"></script>
+<script src="dist/plugin/notes.js"></script>
+<script src="dist/plugin/markdown.js"></script>
+<script src="dist/plugin/highlight.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Reveal.js initialization
+  Reveal.initialize({
+    hash: true,
+    // Navigation: Arrow keys, spacebar
+    controls: true,
+    progress: true,
+    center: true,
+    history: true,
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    // Add a subtle transition
+    transition: 'fade',
+    // Background settings
+    backgroundTransition: 'fade',
+  });
+</script>
+</body>
+</html>
